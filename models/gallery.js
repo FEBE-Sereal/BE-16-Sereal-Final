@@ -20,14 +20,11 @@ const gallerySchema = new Schema({
     minLength: 10,
     // maxLength: 1000,
   },
-  content: {
-    image: {
-      type: String,
-    },
-    video: {
-      type: String,
-    },
+  image: {
+    type: String,
+    required: true,
   },
+  
   categories: [
     {
       type: mongoose.ObjectId,

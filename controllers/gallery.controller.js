@@ -37,21 +37,16 @@ const getGalleryByID = async (req, res) => {
 };
 
 // post
-const createGallery = (req, res) => {
-  const data = req.body;
+const createGallery = async (req, res) => {
+  try {
+    req.body.image = req.file.path
+    const gallery = new Gallery(req.body);
 
-  const gallery = new Gallery(data);
-  gallery.save(function (err) {
-    if (err) {
-      res.status(500).json({
-        message: err.message,
-      });
-    } else {
-      res.status(201).json({
-        message: 'Gallery has been created',
-      });
-    }
-  });
+    const createGallery = await gallery.save();
+    res.status(201).send(createGallery);
+} catch (e) {
+    res.status(400).send(e);
+}
 };
 
 // delete:id

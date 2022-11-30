@@ -37,21 +37,17 @@ const getChallengeByID = async (req, res) => {
 };
 
 // post
-const createChallenge = (req, res) => {
-  const data = req.body;
+const createChallenge = async (req, res) => {
+  try {
+      
+    req.body.image = req.file.path
+    const challenge = new Challenge(req.body);
 
-  const challenge = new Challenge(data);
-  challenge.save(function (err) {
-    if (err) {
-      res.status(500).json({
-        massage: err.message,
-      });
-    } else {
-      res.status(201).json({
-        message: 'Challenge has been created',
-      });
-    }
-  });
+    const createChallenge = await challenge.save();
+    res.status(201).send(createChallenge);
+} catch (e) {
+    res.status(400).send(e);
+}
 };
 
 // delete:id
