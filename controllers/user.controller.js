@@ -7,27 +7,32 @@ require("dotenv").config();
 module.exports = {
   // post: /register
   register: (req, res) => {
-    let {name, email, password} = req.body;
-    let data = { name, email, password};
+    let { name, email, password } = req.body;
+    let data = { name, email, password };
     try {
-      if(name.length  == 0 || email.length <= 3  || password.length == 0){
-        return res.status(406).send({"message": "Data given doesn't meet the standards of required fields"})
+      if (name.length == 0 || email.length <= 3 || password.length == 0) {
+        return res
+          .status(406)
+          .send({
+            message: "Data given doesn't meet the standards of required fields",
+          });
       }
       const saltRounds = 10;
       const hash = bcrypt.hashSync(data.password, saltRounds);
       data.password = hash;
-      console.log(data)
+      // console.log(data)
+
       const user = new User(data);
 
       user.save();
 
       res.status(201).json({
-        "message": "Sign Up success!",
+        message: "Sign Up success!",
       });
     } catch (error) {
       res.status(500).json({
-        "message": "server error",
-        "error": error.message,
+        message: "server error",
+        error: error.message,
       });
     }
   },
@@ -43,24 +48,27 @@ module.exports = {
         });
       }
       const checkPwd = bcrypt.compareSync(data.password, user.password);
-  
+
       if (checkPwd) {
         const token = jwt.sign({ user }, process.env.TOKEN_KEY, {
           expiresIn: 86400,
         }); //expires in 24 hours
-        res.header("x-access-token", token).status(200).json({
-          "message": `Selamat Datang ${user.name.split(" ")[0]}`,
-          "token": token,
-        });
+        res
+          .header("x-access-token", token)
+          .status(200)
+          .json({
+            message: `Selamat Datang ${user.name.split(" ")[0]}`,
+            token: token,
+          });
       } else {
         res.status(400).json({
-          "message": "Login gagal",
+          message: "Login gagal",
         });
-      }  
+      }
     } catch (error) {
       res.status(500).json({
-        "message": "server error",
-        "error": error.message,
+        message: "server error",
+        error: error.message,
       });
     }
   },
@@ -68,9 +76,9 @@ module.exports = {
   // get:/
   getAllUser: async (req, res) => {
     try {
-      const user = await User.find({}, "-__v -role -createdAt -password -updatedAt");
+      const user = await User.find({}, "-__v -createdAt -password");
       // console.log(req.user.user.email)
-      res.json({
+      res.status(200).json({
         message: "get all user success",
         data: user,
       });
@@ -88,14 +96,23 @@ module.exports = {
     try {
       if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(400).json({ message: "invalid id" });
-      const user = await User.findById(id, "-__v -role -createdAt -password -updatedAt").populate('kelas challenge');
+      const user = await User.findById(
+        id,
+        "-__v -createdAt -password"
+      ).populate("kelas challenge", "-description -__v -materi -categories");
+      if (user === null){
+        return res.status(404).json({
+          message: "user dooesn't exist ",
+        });
+      }
       res.status(200).json({
         message: `get ${user.email} success`,
         data: user,
       });
+
     } catch (error) {
-      res.status(404).json({
-        message: "user doesn't exist",
+      res.status(500).json({
+        message: "server error",
         error: error.message,
       });
     }
@@ -106,9 +123,16 @@ module.exports = {
     const id = req.params.id;
     try {
       const data = req.body;
+      if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(400).json({ message: "invalid id" });
       // if (data.)
-      const user = await User.findById(id, "-_id -__v -role -createdAt -password -updatedAt");
-      console.log(user);
+      const user = await User.findById(id, "-__v -createdAt");
+      if (user === null){
+        return res.status(404).json({
+          message: "user dooesn't exist ",
+        });
+      }
+      // console.log(user);
       if (data.name) {
         user.name = data.name;
       }
@@ -116,11 +140,13 @@ module.exports = {
         user.email = data.email;
       }
       if (data.password) {
-        user.password = data.password;
+        const saltRounds = 10;
+        const hash = bcrypt.hashSync(data.password, saltRounds);
+        user.password = hash;
       }
-      // if (data.role) {
-      //   user.role = data.role;
-      // }
+      if (data.role) {
+        user.role = data.role;
+      }
       if (data.sekolah) {
         user.sekolah = data.sekolah;
       }
@@ -131,10 +157,12 @@ module.exports = {
         user.jns_kelamin = data.jns_kelamin;
       }
       for (let item in data.kelas) {
-        if (!user.kelas.includes(data.kelas[item])) user.kelas.push(data.kelas[item]);
+        if (!user.kelas.includes(data.kelas[item]))
+          user.kelas.push(data.kelas[item]);
       }
       for (let item in data.challenge) {
-        if (!user.challenge.includes(data.challenge[item])) user.challenge.push(data.challenge[item]);
+        if (!user.challenge.includes(data.challenge[item]))
+          user.challenge.push(data.challenge[item]);
       }
       if (data.social_media.insta) {
         user.social_media.insta = data.social_media.insta;
@@ -145,7 +173,11 @@ module.exports = {
       if (data.social_media.other) {
         user.social_media.other = data.social_media.other;
       }
-      await user.updateOne();
+
+      // console.log(user)
+      await User.findByIdAndUpdate(id, user);
+      // await user.save();
+
       res.status(200).json({
         massage: `user ${user.email} updated`,
         data: user,
@@ -157,19 +189,26 @@ module.exports = {
       });
     }
   },
-  // updatePasswordById: 
+  // updatePasswordById:
 
   // delete: /:id
   deleteUserByID: async (req, res) => {
     const { id } = req.params;
     try {
+      if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(400).json({ message: "invalid id" });
       const user = await User.findByIdAndDelete(id);
+      if (user === null){
+        return res.status(404).json({
+          message: "user dooesn't exist ",
+        });
+      }
       res.status(200).json({
         message: `user ${user.email} deleted`,
       });
     } catch (error) {
-      res.status(404).json({
-        message: `user ${user.email} doesn't exist`,
+      res.status(500).json({
+        message: `server error`,
         error: error.message,
       });
     }

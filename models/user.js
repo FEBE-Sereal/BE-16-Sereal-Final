@@ -11,7 +11,7 @@ const userSchema = new Schema(
       match: [/^\S+@\S+\.\S+$/, `email is invalid `],
       // [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
       // https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-      unique: true,
+      // unique: true,
       index: true,
       validate: {
         validator(email) {
@@ -20,8 +20,8 @@ const userSchema = new Schema(
             .then((result) => !result);
         },
 
-        // message: (props) => "Email already taken",
-        message: props => `${props.value} Email already taken!`
+        message: (props) => "Email already taken",
+        // message: props => `Email already taken!`
       },
     },
     password: {

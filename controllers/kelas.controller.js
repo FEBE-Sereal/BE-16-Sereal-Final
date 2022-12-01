@@ -5,17 +5,19 @@ const getAllKelas = async (req, res) => {
   try {
     if (JSON.stringify(req.query) !== '{}') {
       const value = Object.values(req.query)[0];
-      kelas = await Kelas.find({ categories: value }, '-__v').populate('materi categories');
+      const kelas = await Kelas.find({ categories: value }, '-__v').populate('materi categories');
       res.status(200).json({
         message: 'Success get kelas by categories',
-        data: kelas,
+        data: kelas
       });
     } else {
-      kelas = await Kelas.find({}, '-__v').populate('materi categories');
-      res.status(200).send(kelas);
+      const kelas = await Kelas.find({}, '-__v').populate('materi categories');
+      res.status(200).json({
+        message: 'Success get all kelas',
+        data: kelas});
     }
   } catch (error) {
-    res.status(500).send({
+    res.status(500).json({
       message: 'Server Error',
       error: error.message,
     });

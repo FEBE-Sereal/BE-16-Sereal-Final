@@ -5,7 +5,7 @@ const kelasSchema = new Schema({
   title: {
     type: String,
     required: true,
-    minLength: 10,
+    minLength: 3,
   },
   image: {
     type: String,

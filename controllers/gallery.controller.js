@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 // get:
 const getAllGallery = async (req, res) => {
   try {
-    const gallery = await Gallery.find({}, '-__v');
+    const gallery = await Gallery.find({}, '-__v').populate("categories", "-__v");
+
     res.status(200).json({
       message: 'Success get all gallery',
       data: gallery,
@@ -21,12 +22,13 @@ const getAllGallery = async (req, res) => {
 const getGalleryByID = async (req, res) => {
   const { id } = req.params;
   try {
-    if (!mongoose.Types.ObjectId.isValid(id)) 
-    return res.status(400).json({ 
-      message: 'No data for this gallery' 
-    });
-
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'invalid gallery id' });
     const gallery = await Gallery.findOne({ _id: id });
+    if (gallery === null){
+      return res.status(404).json({
+        message: "gallery data doesn't exist ",
+      });
+    }
     res.status(200).json({
       message: `Get gallery with id ${id} success`,
       data: gallery,
@@ -93,7 +95,9 @@ const updateGalleryByID = async (req, res) => {
       if (!gallery.categories.includes(categories[items])) gallery.categories.push(categories[items]);
     }
 
-    await gallery.updateOne();
+    if (status != undefined && typeof status == 'boolean') status ? (gallery.status = true) : (gallery.status = false);
+
+    await gallery.save();
 
     res.json({
       message: 'Success update gallery',

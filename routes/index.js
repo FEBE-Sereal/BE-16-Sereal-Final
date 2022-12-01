@@ -6,6 +6,7 @@ const materiRouter = require('./materi.router');
 const challengeRouter = require('./challenge.router');
 const galleryRouter = require('./gallery.router');
 const kelasRouter = require('./kelas.router');
+const advertisingRouter = require('./advertising.router');
 const categoriesRouter = require('./categories.router');
 const authRouter = require('./auth.router');
 // const verifyToken = require('../middleware/auth');
@@ -16,6 +17,7 @@ router.use('/materi', materiRouter);
 router.use('/challenge', challengeRouter);
 router.use('/gallery', galleryRouter);
 router.use('/kelas', kelasRouter);
+router.use('/advertising', advertisingRouter);
 router.use('/users', authorize, userRouter);
 router.use('/categories', categoriesRouter);
 
