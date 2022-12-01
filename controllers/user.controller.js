@@ -6,25 +6,27 @@ require("dotenv").config();
 
 module.exports = {
   // post: /register
-  register: (req, res) => {
+  register: async (req, res) => {
     let { name, email, password } = req.body;
     let data = { name, email, password };
     try {
       if (name.length == 0 || email.length <= 3 || password.length == 0) {
-        return res
-          .status(406)
-          .send({
-            message: "Data given doesn't meet the standards of required fields",
-          });
+        return res.status(406).json({
+          error: "Data given doesn't meet the standards of required fields",
+        });
       }
       const saltRounds = 10;
       const hash = bcrypt.hashSync(data.password, saltRounds);
       data.password = hash;
       // console.log(data)
-
-      const user = new User(data);
-
-      user.save();
+      try {
+        const user = new User(data);
+        await user.save();
+      } catch (error) {
+        res.status(406).json({
+          error: error.message
+        })
+      }
 
       res.status(201).json({
         message: "Sign Up success!",
@@ -100,7 +102,7 @@ module.exports = {
         id,
         "-__v -createdAt -password"
       ).populate("kelas challenge", "-description -__v -materi -categories");
-      if (user === null){
+      if (user === null) {
         return res.status(404).json({
           message: "user dooesn't exist ",
         });
@@ -109,7 +111,6 @@ module.exports = {
         message: `get ${user.email} success`,
         data: user,
       });
-
     } catch (error) {
       res.status(500).json({
         message: "server error",
@@ -127,7 +128,7 @@ module.exports = {
         return res.status(400).json({ message: "invalid id" });
       // if (data.)
       const user = await User.findById(id, "-__v -createdAt");
-      if (user === null){
+      if (user === null) {
         return res.status(404).json({
           message: "user dooesn't exist ",
         });
@@ -198,7 +199,7 @@ module.exports = {
       if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(400).json({ message: "invalid id" });
       const user = await User.findByIdAndDelete(id);
-      if (user === null){
+      if (user === null) {
         return res.status(404).json({
           message: "user dooesn't exist ",
         });
