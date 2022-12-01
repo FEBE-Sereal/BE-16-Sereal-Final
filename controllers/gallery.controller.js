@@ -24,7 +24,7 @@ const getGalleryByID = async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'invalid gallery id' });
     const gallery = await Gallery.findOne({ _id: id });
-    if (gallery === null){
+    if (gallery === null) {
       return res.status(404).json({
         message: "gallery data doesn't exist ",
       });
@@ -43,8 +43,8 @@ const getGalleryByID = async (req, res) => {
 
 // post
 const createGallery = async (req, res) => {
-  try { 
-    req.body.image = req.file.path.replace("\\","/")
+  try {
+    req.body.image = req.file.path.replace("\\", "/")
     const gallery = new Gallery(req.body);
 
     const createGallery = await gallery.save();
@@ -58,20 +58,20 @@ const createGallery = async (req, res) => {
 const deleteGalleryByID = async (req, res) => {
   const { id } = req.params;
   try {
-    if(!mongoose.Types.ObjectId.isValid(id)) 
-    return res.status(400).json({ 
-      message: 'No data for this gallery' 
-    });
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(400).json({
+        message: 'No data for this gallery'
+      });
 
     await Gallery.deleteOne({ _id: id });
-    res.status(200).send({ 
-      message: 'Success delete gallery' 
+    res.status(200).send({
+      message: 'Success delete gallery'
     });
   } catch (error) {
     res.status(404);
-    res.send({ 
-      error: "Gallery doesn't exist!", 
-      message: error.message 
+    res.send({
+      error: "Gallery doesn't exist!",
+      message: error.message
     });
   }
 };
@@ -79,7 +79,7 @@ const deleteGalleryByID = async (req, res) => {
 // update:id
 const updateGalleryByID = async (req, res) => {
   const { id } = req.params;
-  const { title, description, author, image, categories } = req.body;
+  const { title, description, author, categories } = req.body;
   try {
     const gallery = await Gallery.findOne({ _id: id });
 
@@ -89,13 +89,11 @@ const updateGalleryByID = async (req, res) => {
 
     if (description) gallery.description = description;
 
-    if (image) gallery.image = image;
+    if (req.file.path) gallery.image = req.file.path;
 
     for (let items in categories) {
       if (!gallery.categories.includes(categories[items])) gallery.categories.push(categories[items]);
     }
-
-    if (status != undefined && typeof status == 'boolean') status ? (gallery.status = true) : (gallery.status = false);
 
     await gallery.save();
 
