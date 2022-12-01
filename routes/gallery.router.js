@@ -8,7 +8,7 @@ const { getAllGallery, getGalleryByID, createGallery, deleteGalleryByID, updateG
 router.get('/', getAllGallery);
 router.get('/:id', getGalleryByID);
 router.post('/', verifyToken, createGallery);
-router.delete('/:id', authorize, deleteGalleryByID);
-router.patch('/:id', authorize, updateGalleryByID);
+router.delete('/:id', deleteGalleryByID);
+router.patch('/:id', updateGalleryByID);
 
 module.exports = router;

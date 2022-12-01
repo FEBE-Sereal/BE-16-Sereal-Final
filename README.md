@@ -52,7 +52,9 @@ Otherwise you will get:
 ```
 
 ### Register
+
 Request:
+
 - Method : **POST**
 - Endpoint : `/register`
 - Header:
@@ -70,6 +72,7 @@ Request:
 ```
 
 Response:
+
 - status code: **201**
 
 ```json
@@ -91,12 +94,14 @@ Response:
 ```json
 {
   "message": "string",
-  "error": "string",
+  "error": "string"
 }
 ```
 
 ### Login
+
 Request:
+
 - Method : POST
 - Endpoint : /login
 - Body :
@@ -109,6 +114,7 @@ Request:
 ```
 
 Response:
+
 - status code: **200**
 
 ```json
@@ -160,29 +166,29 @@ Response :
 
 ```json
 {
-    "massage":"string",
-    "data":[
-        {
-            "id":"string, unique",
-            "title":"string",
-            "body":"string",
-            "content":{
-                "image":["string, link"],
-                "video":["string, link"]
-            },
-            "status":"Boolean"
-        },
-        {
-            "id":"string, unique",
-            "title":"string",
-            "body":"string",
-            "content":{
-                "image":["string, link"],
-                "video":["string, link"]
-            },
-            "status":"Boolean"
-        }
-    ]
+  "massage": "string",
+  "data": [
+    {
+      "id": "string, unique",
+      "title": "string",
+      "body": "string",
+      "content": {
+        "image": ["string, link"],
+        "video": ["string, link"]
+      },
+      "status": "Boolean"
+    },
+    {
+      "id": "string, unique",
+      "title": "string",
+      "body": "string",
+      "content": {
+        "image": ["string, link"],
+        "video": ["string, link"]
+      },
+      "status": "Boolean"
+    }
+  ]
 }
 ```
 
@@ -210,18 +216,17 @@ Response:
 
 ```json
 {
-    "massage":"string",
-    "data":{
-            "id":"string, unique",
-            "title":"string",
-            "body":"string",
-            "content":{
-                "image":["string, link"],
-                "video":["string, link"]
-            },
-            "status":"Boolean"
-    }
-
+  "massage": "string",
+  "data": {
+    "id": "string, unique",
+    "title": "string",
+    "body": "string",
+    "content": {
+      "image": ["string, link"],
+      "video": ["string, link"]
+    },
+    "status": "Boolean"
+  }
 }
 ```
 
@@ -247,13 +252,14 @@ Request :
 
 ```json
 {
-    "id":"string, unique",
-    "title":"string",
-    "body":"string",
-    "content":{
-        "image":["string, link"],"video":["string, link"]
-    },
-    "status":"Boolean"
+  "id": "string, unique",
+  "title": "string",
+  "body": "string",
+  "content": {
+    "image": ["string, link"],
+    "video": ["string, link"]
+  },
+  "status": "Boolean"
 }
 ```
 
@@ -290,13 +296,13 @@ Request :
 
 ```json
 {
-    "title":"string",
-    "body":"string",
-    "content":{
-      "image":["string, link"],
-      "video":["string, link"]
-    },
-    "status":"Boolean"
+  "title": "string",
+  "body": "string",
+  "content": {
+    "image": ["string, link"],
+    "video": ["string, link"]
+  },
+  "status": "Boolean"
 }
 ```
 
@@ -365,88 +371,88 @@ Response :
 
 ```json
 {
-    "massage":"string",
-    "data":[
+  "massage": "string",
+  "data": [
+    {
+      "id": "string, unique",
+      "title": "string",
+      "description": "string",
+      "materi": [
         {
-            "id":"string, unique",
-            "title":"string",
-            "description":"string",
-            "materi":[
-              {
-                  "id":"string, unique",
-                  "title":"string",
-                  "body":"string",
-                  "content":{
-                    "image":["string", "link"],
-                    "video":["string, link"]
-                  },
-                  "status":"Boolean"
-              },
-              {
-                  "id":"string, unique",
-                  "title":"string",
-                  "body":"string",
-                  "content":{
-                      "image":["string", "link"],
-                      "video":["string, link"]
-                  },
-                  "status":"Boolean"
-              }
-            ],
-            "categories":[
-              {
-                "id":"string, unique",
-                "name":"string"
-              },
-              {
-                "id":"string, unique",
-                "name":"string"
-              }
-            ],
-            "level":"string",
-            "status":"Boolean"
+          "id": "string, unique",
+          "title": "string",
+          "body": "string",
+          "content": {
+            "image": ["string", "link"],
+            "video": ["string, link"]
+          },
+          "status": "Boolean"
         },
         {
-            "id":"string, unique",
-            "title":"string",
-            "description":"string",
-            "materi":[
-              {
-                  "id":"string, unique",
-                  "title":"string",
-                  "body":"string",
-                  "content":{
-                      "image":["string", "link"],
-                      "video":["string, link"]
-                  },
-                  "status":"Boolean"
-              },
-              {
-                  "id":"string, unique",
-                  "title":"string",
-                  "body":"string",
-                  "content":{
-                      "image":"[string]",
-                      "video":"[string]"
-                  },
-                  "level":"string",
-                  "status":"Boolean"
-              }
-            ],
-            "categories":[
-              {
-                "id":"string, unique",
-                "name":"string"
-              },
-              {
-                "id":"string, unique",
-                "name":"string"
-              }
-            ],
-            "level":"string",
-            "status":"Boolean"
+          "id": "string, unique",
+          "title": "string",
+          "body": "string",
+          "content": {
+            "image": ["string", "link"],
+            "video": ["string, link"]
+          },
+          "status": "Boolean"
         }
-    ]
+      ],
+      "categories": [
+        {
+          "id": "string, unique",
+          "name": "string"
+        },
+        {
+          "id": "string, unique",
+          "name": "string"
+        }
+      ],
+      "level": "string",
+      "status": "Boolean"
+    },
+    {
+      "id": "string, unique",
+      "title": "string",
+      "description": "string",
+      "materi": [
+        {
+          "id": "string, unique",
+          "title": "string",
+          "body": "string",
+          "content": {
+            "image": ["string", "link"],
+            "video": ["string, link"]
+          },
+          "status": "Boolean"
+        },
+        {
+          "id": "string, unique",
+          "title": "string",
+          "body": "string",
+          "content": {
+            "image": "[string]",
+            "video": "[string]"
+          },
+          "level": "string",
+          "status": "Boolean"
+        }
+      ],
+      "categories": [
+        {
+          "id": "string, unique",
+          "name": "string"
+        },
+        {
+          "id": "string, unique",
+          "name": "string"
+        }
+      ],
+      "level": "string",
+      "status": "Boolean"
+    }
+  ]
 }
 ```
 
@@ -474,47 +480,46 @@ Response:
 
 ```json
 {
-    "massage":"string",
-    "data":{
-            "id":"string, unique",
-            "title":"string",
-            "description":"string",
-            "materi":[
-              {
-                  "id":"string, unique",
-                  "title":"string",
-                  "body":"string",
-                  "content":{
-                      "image":["string", "link"],
-                      "video":["string, link"]
-                  },
-                  "status":"Boolean"
-              },
-              {
-                  "id":"string, unique",
-                  "title":"string",
-                  "body":"string",
-                  "content":{
-                      "image":["string", "link"],
-                      "video":["string, link"]
-                  },
-                  "status":"Boolean"
-              }
-            ],
-            "categories":[
-              {
-                "id":"string, unique",
-                "name":"string"
-              },
-              {
-                "id":"string, unique",
-                "name":"string"
-              }
-            ],
-            "level":"string",
-            "status": "Boolean"
-        }
-
+  "massage": "string",
+  "data": {
+    "id": "string, unique",
+    "title": "string",
+    "description": "string",
+    "materi": [
+      {
+        "id": "string, unique",
+        "title": "string",
+        "body": "string",
+        "content": {
+          "image": ["string", "link"],
+          "video": ["string, link"]
+        },
+        "status": "Boolean"
+      },
+      {
+        "id": "string, unique",
+        "title": "string",
+        "body": "string",
+        "content": {
+          "image": ["string", "link"],
+          "video": ["string, link"]
+        },
+        "status": "Boolean"
+      }
+    ],
+    "categories": [
+      {
+        "id": "string, unique",
+        "name": "string"
+      },
+      {
+        "id": "string, unique",
+        "name": "string"
+      }
+    ],
+    "level": "string",
+    "status": "Boolean"
+  }
 }
 ```
 
@@ -540,12 +545,12 @@ Request :
 
 ```json
 {
-    "title":"string",
-    "description":"string",
-    "materi":["objectID"],
-    "categories":["objectID"],
-    "level":"string",
-    "status": "Boolean"
+  "title": "string",
+  "description": "string",
+  "materi": ["objectID"],
+  "categories": ["objectID"],
+  "level": "string",
+  "status": "Boolean"
 }
 ```
 
@@ -581,12 +586,12 @@ Request :
 
 ```json
 {
-    "title":"string",
-    "description":"string",
-    "materi":["objectID"],
-    "categories":["objectID"],
-    "level":"string",
-    "status":"Boolean"
+  "title": "string",
+  "description": "string",
+  "materi": ["objectID"],
+  "categories": ["objectID"],
+  "level": "string",
+  "status": "Boolean"
 }
 ```
 
@@ -641,6 +646,7 @@ Response:
 ### Gallery
 
 #### Get All Gallery
+
 Request:
 
 - Method: **GET**
@@ -650,7 +656,9 @@ Request:
   - x-access-token : `token`
 
 Response:
+
 - status code: **200**
+
 ```json
 {
   "message": "Success get all gallery",
@@ -660,25 +668,29 @@ Response:
       "title": "string, min length",
       "author": "string",
       "description": "string",
+      "image": "string",
       "categories": [
         {
           "_id": "string, unique",
           "name": "string"
         }
-      ],
-      "status": "Boolean"
+      ]
     }
   ]
 }
 ```
+
 - status code: **500**
+
 ```json
 {
   "message": "string",
   "error": "string"
 }
 ```
+
 #### Get Gallery by ID
+
 Request:
 
 - Method: **GET**
@@ -688,7 +700,9 @@ Request:
   - x-access-token : `token`
 
 Response:
+
 - status code: **200**
+
 ```json
 {
   "message": "string",
@@ -697,17 +711,20 @@ Response:
     "title": "string",
     "author": "string",
     "description": "string",
-    "categories": [
-      "categories_id"
-    ]}
+    "image": "string",
+    "categories": ["categories_id"]
+  }
 }
 ```
+
 - status code: **400**
+
 ```json
 {
   "message": "string"
 }
 ```
+
 - status code: **404**
 
 ```json
@@ -715,6 +732,7 @@ Response:
   "message": "string"
 }
 ```
+
 - status code: **500**
 
 ```json
@@ -723,15 +741,84 @@ Response:
   "data": "string"
 }
 ```
+
 #### Create Gallery
+
+Request :
+
+- Method: **POST**
+- Endpoint: `/gallery`
+- Header:
+  - Content-Type: application/json
+  - Accept: application/json
+  - x-access-token = "token"
+- Body: form-data
+
+| KEY         | Value       |
+| ----------- | ----------- |
+| title       | string      |
+| author      | string      |
+| description | string      |
+| image       | select file |
+| categories  | objectID    |
+
+Response:
+
+- status code: **201**
+
+```json
+{
+  "title": "string",
+  "author": "string",
+  "description": "string",
+  "image": "string",
+  "categories": ["categories_id"],
+  "_id": "string, unique"
+}
+```
+
+- status code: **400**
+
+```json
+{
+  "message": "string"
+}
+```
 
 #### Update Gallery by ID
 
 #### Delete Gallery by ID
 
+Request:
+
+- Method: **DELETE**
+- Endpoint: `/gallery/{kelas_id}`
+- Header:
+  - Accept: application/json
+  - x-access-token : `token`
+
+Response
+
+- Status code: **200**
+
+```json
+{
+  "message": "string"
+}
+```
+
+- status code: **404**
+
+```json
+{
+  "message": "string"
+}
+```
+
 ### Users
 
 #### Get All User
+
 Request:
 
 - Method: **GET**
@@ -743,6 +830,7 @@ Request:
 Response:
 
 - status code: **200**
+
 ```json
 {
   "message": "string",
@@ -752,7 +840,7 @@ Response:
       "email": "string, must have @",
       "role": "user||admin",
       "sekolah": "string",
-      "jns_kelamin":"pria||wanita",
+      "jns_kelamin": "pria||wanita",
       "kelas": ["kelas_id", "kelas_id"],
       "challenge": ["challenge_id", "challenge_id"],
       "social_media": {
@@ -791,30 +879,34 @@ Response:
 
 ```json
 {
-"message": "string",
+  "message": "string",
   "data": [
     {
       "_id": "string",
       "email": "string, must have @",
       "role": "user||admin",
       "sekolah": "string",
-      "jns_kelamin":"pria||wanita",
-      "kelas": [{
-        "_id": "string, unique",
-        "title": "string",
-        "image": "string, link",
-        "level": "string",
-        "status": "Boolean"
-      }],
-      "challenge": [{
-        "_id": "6379e9da860e53a54a26f3f1",
-        "title": "Design Poster Digital",
-        "content": {
-          "image": ["string, link"]
-        },
-        "requirement": "string",
-        "status": "Boolean"
-      }],
+      "jns_kelamin": "pria||wanita",
+      "kelas": [
+        {
+          "_id": "string, unique",
+          "title": "string",
+          "image": "string, link",
+          "level": "string",
+          "status": "Boolean"
+        }
+      ],
+      "challenge": [
+        {
+          "_id": "6379e9da860e53a54a26f3f1",
+          "title": "Design Poster Digital",
+          "content": {
+            "image": ["string, link"]
+          },
+          "requirement": "string",
+          "status": "Boolean"
+        }
+      ],
       "social_media": {
         "insta": "string",
         "fb": "string",
@@ -825,12 +917,15 @@ Response:
   ]
 }
 ```
+
 - status code: **400**
+
 ```json
 {
   "message": "string"
 }
 ```
+
 - status code: **404**
 
 ```json
@@ -838,6 +933,7 @@ Response:
   "message": "string"
 }
 ```
+
 - status code: **500**
 
 ```json
@@ -858,53 +954,60 @@ Request:
   - Accept: application/json
   - x-access-token : `token`
 - Body:
+
 ```json
 {
-  "name":"string",
+  "name": "string",
   "email": "string, must have @, unique",
-  "password":"string",
+  "password": "string",
   "role": "user||admin",
   "sekolah": "string",
-  "tgl_lahir":"yyyy-mm-dd",
+  "tgl_lahir": "yyyy-mm-dd",
   "jns_kelamin": "pria||wanita",
   "kelas": ["kelas_id", "kelas_id"],
   "challenge": ["challenge_id"],
   "social_media": {
     "insta": "string",
     "fb": "string",
-    "other":"string"
+    "other": "string"
   }
 }
 ```
 
 Response:
+
 - status code: **200**
+
 ```json
 {
   "message": "string",
   "data": {
-    "name":"string",
+    "name": "string",
     "email": "string, must have @, unique",
-    "password":"string",
+    "password": "string",
     "role": "user||admin",
     "sekolah": "string",
-    "tgl_lahir":"yyyy-mm-dd",
+    "tgl_lahir": "yyyy-mm-dd",
     "jns_kelamin": "pria||wanita",
     "kelas": ["kelas_id", "kelas_id"],
     "challenge": ["challenge_id"],
     "social_media": {
       "insta": "string",
       "fb": "string",
-      "other":"string"
-  }}
+      "other": "string"
+    }
+  }
 }
 ```
+
 - status code: **400**
+
 ```json
 {
   "message": "string"
 }
 ```
+
 - status code: **404**
 
 ```json
@@ -912,6 +1015,7 @@ Response:
   "message": "string"
 }
 ```
+
 - status code: **500**
 
 ```json
@@ -922,6 +1026,7 @@ Response:
 ```
 
 #### Delete User by ID
+
 Request:
 
 - Method: **PATCH**
@@ -931,18 +1036,23 @@ Request:
   - x-access-token : `token`
 
 Response:
+
 - status code: **200**
+
 ```json
 {
   "message": "string"
 }
 ```
+
 - status code: **400**
+
 ```json
 {
   "message": "string"
 }
 ```
+
 - status code: **404**
 
 ```json
@@ -950,6 +1060,7 @@ Response:
   "message": "string"
 }
 ```
+
 - status code: **500**
 
 ```json
