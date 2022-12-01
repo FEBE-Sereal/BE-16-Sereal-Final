@@ -156,9 +156,9 @@ Response:
 Request :
 
 - Method: **GET**
-- Endpoint: `/materi `
+- Endpoint: `/materi`
 - Header:
-  - Accept:application/json
+  - Accept: application/json
 
 Response :
 
@@ -282,15 +282,15 @@ Response:
 }
 ```
 
-#### Update Materi
+#### Update Materi By ID
 
 Request :
 
 - Method: **PATCH**
 - Endpoint: `/materi/{materi_id}`
 - Header:
-  - Content-Type:application/json
-  - Accept:application/json
+  - Content-Type: application/json
+  - Accept: application/json
   - x-access-token = "token"
 - Body:
 
@@ -325,14 +325,14 @@ Responses:
 }
 ```
 
-#### Delete Materi
+#### Delete Materi By ID
 
 Request :
 
-- Method: **Delete**
+- Method: **DELETE**
 - Endpoint: `/materi/{materi_id}`
 - Header:
-  - Accept:application/json
+  - Accept: application/json
   - x-access-token = "token"
 
 Response:
@@ -361,9 +361,9 @@ Response:
 Request :
 
 - Method: **GET**
-- Endpoint: `/kelas `
+- Endpoint: `/kelas`
 - Header:
-  - Accept:application/json
+  - Accept: application/json
 
 Response :
 
@@ -472,7 +472,7 @@ Request :
 - Method: **GET**
 - Endpoint: `/kelas/{kelas_id}`
 - Header:
-  - Accept:application/json
+  - Accept: application/json
 
 Response:
 
@@ -538,8 +538,8 @@ Request :
 - Method: **POST**
 - Endpoint: `/kelas`
 - Header:
-  - Content-Type:application/json
-  - Accept:application/json
+  - Content-Type: application/json
+  - Accept: application/json
   - x-access-token = "token"
 - Body:
 
@@ -573,7 +573,7 @@ Response:
 }
 ```
 
-#### Update Kelas
+#### Update Kelas By ID
 
 Request :
 
@@ -614,14 +614,14 @@ Responses:
 }
 ```
 
-#### Delete Kelas
+#### Delete Kelas BY ID
 
 Request :
 
-- Method: **Delete**
+- Method: **DELETE**
 - Endpoint: `/kelas/{kelas_id}`
 - Header:
-  - Accept:application/json
+  - Accept: application/json
   - x-access-token = "token"
 
 Response:
@@ -653,11 +653,11 @@ Request:
 - Endpoint: `/gallery`
 - Header:
   - Accept: application/json
-  - x-access-token : `token`
+  - x-access-token : "token"
 
 Response:
 
-- status code: **200**
+- Status code: **200**
 
 ```json
 {
@@ -680,7 +680,7 @@ Response:
 }
 ```
 
-- status code: **500**
+- Status code: **500**
 
 ```json
 {
@@ -694,14 +694,14 @@ Response:
 Request:
 
 - Method: **GET**
-- Endpoint: `/gallery`
+- Endpoint: `/gallery/{gallery_id}`
 - Header:
   - Accept: application/json
-  - x-access-token : `token`
+  - x-access-token : "token"
 
 Response:
 
-- status code: **200**
+- Status code: **200**
 
 ```json
 {
@@ -717,7 +717,7 @@ Response:
 }
 ```
 
-- status code: **400**
+- Status code: **400**
 
 ```json
 {
@@ -725,7 +725,7 @@ Response:
 }
 ```
 
-- status code: **404**
+- Status code: **404**
 
 ```json
 {
@@ -733,7 +733,7 @@ Response:
 }
 ```
 
-- status code: **500**
+- Status code: **500**
 
 ```json
 {
@@ -764,7 +764,7 @@ Request :
 
 Response:
 
-- status code: **201**
+- Status code: **201**
 
 ```json
 {
@@ -792,7 +792,7 @@ Response:
 Request:
 
 - Method: **DELETE**
-- Endpoint: `/gallery/{kelas_id}`
+- Endpoint: `/gallery/{gallery_id}`
 - Header:
   - Accept: application/json
   - x-access-token : `token`
