@@ -5,8 +5,6 @@ const challengeSchema = new Schema({
   title: {
     type: String,
     required: true,
-    minLength: 10,
-    // maxLength: 100,
   },
   description: {
     type: String,
@@ -14,23 +12,9 @@ const challengeSchema = new Schema({
     minLength: 10,
     // maxLength: 1000,
   },
-  requirement: {
+  image: {
     type: String,
     required: true,
-    minLength: 10,
-    // maxLength: 10000,
-  },
-  content: {
-    image: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
-    video: {
-      type: String,
-      required: false,
-    },
   },
   categories: [
     {
