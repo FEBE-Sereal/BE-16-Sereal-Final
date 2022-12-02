@@ -1,5 +1,6 @@
 const Gallery = require('../models/gallery');
 const mongoose = require('mongoose');
+
 // get:
 const getAllGallery = async (req, res) => {
   try {
@@ -20,11 +21,10 @@ const getAllGallery = async (req, res) => {
 // get:id
 const getGalleryByID = async (req, res) => {
   const { id } = req.params;
-
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'invalid gallery id' });
     const gallery = await Gallery.findOne({ _id: id });
-    if (gallery === null){
+    if (gallery === null) {
       return res.status(404).json({
         message: "gallery data doesn't exist ",
       });
@@ -44,34 +44,42 @@ const getGalleryByID = async (req, res) => {
 // post
 const createGallery = async (req, res) => {
   try {
-    req.body.image = req.file.path
+    req.body.image = req.file.path.replace("\\", "/")
     const gallery = new Gallery(req.body);
 
     const createGallery = await gallery.save();
     res.status(201).send(createGallery);
-} catch (e) {
+  } catch (e) {
     res.status(400).send(e);
-}
+  }
 };
 
 // delete:id
 const deleteGalleryByID = async (req, res) => {
   const { id } = req.params;
   try {
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ msg: 'No data for this gallery' });
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(400).json({
+        message: 'No data for this gallery'
+      });
 
     await Gallery.deleteOne({ _id: id });
-    res.status(200).send({ message: 'Success delete gallery' });
+    res.status(200).send({
+      message: 'Success delete gallery'
+    });
   } catch (error) {
     res.status(404);
-    res.send({ error: "Gallery doesn't exist!", message: error.message });
+    res.send({
+      error: "Gallery doesn't exist!",
+      message: error.message
+    });
   }
 };
 
 // update:id
 const updateGalleryByID = async (req, res) => {
   const { id } = req.params;
-  const { title, description, author, content, categories, status } = req.body;
+  const { title, description, author, categories } = req.body;
   try {
     const gallery = await Gallery.findOne({ _id: id });
 
@@ -81,17 +89,11 @@ const updateGalleryByID = async (req, res) => {
 
     if (description) gallery.description = description;
 
-    if (content) {
-      if (content.image) gallery.content.image = content.image;
-
-      if (content.video) gallery.content.video = content.video;
-    }
+    if (req.file.path) gallery.image = req.file.path;
 
     for (let items in categories) {
       if (!gallery.categories.includes(categories[items])) gallery.categories.push(categories[items]);
     }
-
-    if (status != undefined && typeof status == 'boolean') status ? (gallery.status = true) : (gallery.status = false);
 
     await gallery.save();
 
