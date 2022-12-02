@@ -11,18 +11,19 @@ const userSchema = new Schema(
       match: [/^\S+@\S+\.\S+$/, `email is invalid `],
       // [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
       // https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-      // unique: true,
+      unique: true,
       index: true,
-      validate: {
-        validator(email) {
-          return this.model("User")
-            .findOne({ email })
-            .then((result) => !result);
-        },
-
-        message: (props) => "Email already taken",
-        // message: props => `Email already taken!`
-      },
+      // validate: {
+      //   validator(email) {
+      //     try {return this.model("User")
+      //       .findOne({ email })
+      //       .then((result) !== result);}
+      //     catch(err){
+      //     }
+      //   },
+      //   message: (props) => `${props.value} already taken`,
+      //   message: props => `Email already taken!`
+      // },
     },
     password: {
       type: String,
@@ -62,7 +63,10 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
 const User = mongoose.model("User", userSchema);
+userSchema.path("email").validate(async(email) => {
+  const emailCount = await mongoose.models.User.countDocuments({email})
+  return !emailCount
+}, "Email already exist")
 
 module.exports = User;
