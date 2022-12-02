@@ -23,7 +23,7 @@ const getCategoriesByID = async (req, res) => {
 
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'No data for this categories' });
-    const categories = await Categories.findOne({ _id: id });
+    const categories = await Categories.findOne({ _id: id }, "-__v");
     res.status(200).json({
       message: `Get categories with id ${id} success`,
       data: categories,

@@ -1,5 +1,5 @@
 const Materi = require('../models/materi');
-
+const mongoose = require('mongoose');
 module.exports = {
   getAllMateri: async (req, res) => {
     try {
@@ -54,22 +54,22 @@ module.exports = {
 
   updateMateriByID: async (req, res) => {
     const { id } = req.params;
-    const { title, description, content, categories, status } = req.body;
+    const { title, body, content, status } = req.body;
     try {
       const materi = await Materi.findOne({ _id: id });
 
       if (title) materi.title = title;
 
-      if (description) materi.description = description;
+      if (body) materi.body = body;
 
       if (content) {
-        if (content.image) materi.content.image = content.image;
+        for (let items in content.image) {
+          if (content.image[items]) materi.content.image[items] = content.image[items];
+        }
 
-        if (content.video) materi.content.video = content.video;
-      }
-
-      for (let key in categories) {
-        if (categories[key]) materi.categories[key] = categories[key];
+        for (let items in content.video) {
+          if (content.video[items]) materi.content.video[items] = content.video[items];
+        }
       }
 
       if (status != undefined && typeof status == 'boolean') status ? (materi.status = true) : (materi.status = false);

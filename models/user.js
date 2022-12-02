@@ -6,12 +6,12 @@ const userSchema = new Schema(
     name: String,
     email: {
       type: String,
-      lowercase: true,
+      lowercase: [true, "please use lowercase email"],
       required: [true, "email is required"],
-      match: [/^\S+@\S+\.\S+$/, " is invalid"],
+      match: [/^\S+@\S+\.\S+$/, `email is invalid `],
       // [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
       // https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-      unique: true,
+      // unique: true,
       index: true,
       validate: {
         validator(email) {
@@ -19,8 +19,9 @@ const userSchema = new Schema(
             .findOne({ email })
             .then((result) => !result);
         },
+
         message: (props) => "Email already taken",
-        // message: props => `${props.value} Email already taken!`
+        // message: props => `Email already taken!`
       },
     },
     password: {
@@ -38,16 +39,18 @@ const userSchema = new Schema(
       type: String,
       enum: ["pria", "wanita"],
     },
-    tgl_lahir: Date,
+    tgl_lahir: {
+      type: Date,
+    },
     kelas: [
       {
-        type: mongoose.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Kelas",
       },
     ],
     challenge: [
       {
-        type: mongoose.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Challenge",
       },
     ],

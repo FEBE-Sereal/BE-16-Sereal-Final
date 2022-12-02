@@ -1,28 +1,28 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const challengeSchema = new Schema({
+const advertisingSchema = new Schema({
   title: {
     type: String,
     required: true,
+    minLength: 3,
+  },
+  image: {
+    type: String,
+    required: true,
+    minLength: 10,
   },
   description: {
     type: String,
     required: true,
     minLength: 10,
-    // maxLength: 1000,
   },
-  image: {
-    type: String,
+  categories: {
+    type: mongoose.ObjectId,
+    ref: 'Categories',
     required: true,
-  },
-  categories: [
-    {
-      type: mongoose.ObjectId,
-      ref: 'Categories',
-      required: true,
-    },
-  ],
+  }
+  ,
   status: {
     type: Boolean,
     default: false,
@@ -30,6 +30,6 @@ const challengeSchema = new Schema({
   },
 });
 
-const Challenge = mongoose.model('Challenge', challengeSchema);
+const Advertising = mongoose.model('Advertising', advertisingSchema);
 
-module.exports = Challenge;
+module.exports = Advertising;

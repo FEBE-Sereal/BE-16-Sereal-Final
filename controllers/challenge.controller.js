@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // get:
 const getAllChallenge = async (req, res) => {
   try {
-    const challenge = await Challenge.find({}, '-__v');
+    const challenge = await Challenge.find({}, '-__v').populate('categories');
 
     res.status(200).json({
       message: 'Success get all challenges',
@@ -23,7 +23,7 @@ const getChallengeByID = async (req, res) => {
 
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'No data for this challenge' });
-    const challenge = await Challenge.findOne({ _id: id });
+    const challenge = await Challenge.findOne({ _id: id }).populate('categories');
     res.status(200).json({
       message: `Get challenge with id ${id} success`,
       data: challenge,
@@ -37,21 +37,17 @@ const getChallengeByID = async (req, res) => {
 };
 
 // post
-const createChallenge = (req, res) => {
-  const data = req.body;
+const createChallenge = async (req, res) => {
+  try {
+      
+    req.body.image = req.file.path
+    const challenge = new Challenge(req.body);
 
-  const challenge = new Challenge(data);
-  challenge.save(function (err) {
-    if (err) {
-      res.status(500).json({
-        massage: err.message,
-      });
-    } else {
-      res.status(201).json({
-        message: 'Challenge has been created',
-      });
-    }
-  });
+    const createChallenge = await challenge.save();
+    res.status(201).send(createChallenge);
+} catch (e) {
+    res.status(400).send(e);
+}
 };
 
 // delete:id
@@ -90,7 +86,7 @@ const updateChallengeByID = async (req, res) => {
     }
 
     for (let items in categories) {
-      if (categories[items]) challenge.categories[items] = categories[items];
+      if (!challenge.categories.includes(categories[items])) challenge.categories.push(categories[items]);
     }
 
     if (status != undefined && typeof status == 'boolean') status ? (challenge.status = true) : (challenge.status = false);

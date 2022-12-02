@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const categoriesSchema = new Schema({
-  nama: {
+  name: {
     type: String,
     required: true,
     minLength: 3,
