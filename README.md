@@ -1069,3 +1069,196 @@ Response:
   "data": "string"
 }
 ```
+
+### Advertising
+
+#### Get All Advertising
+
+Request :
+
+- Method: **GET**
+- Endpoint: `/advertising `
+- Header:
+  - Accept:application/json
+
+Response :
+
+- Status code: **200**
+
+```json
+{
+    "massage":"string",
+    "data":[
+        {
+            "id":"string, unique",
+            "title":"string",
+            "description":"string",
+            "image":"string",
+            "categories":"string, unique",
+            "status":"boolean"
+        },
+        {
+            "id":"string, unique",
+            "title":"string",
+            "description":"string",
+            "image":"string",
+            "categories":"string, unique",
+            "status":"boolean"
+        }
+    ]
+}
+```
+
+- Status code: **500**
+
+```json
+{
+  "message": "string",
+  "error": "string"
+}
+```
+
+#### Get Advertising by ID
+
+Request :
+
+- Method: **GET**
+- Endpoint: `/advertising/{advertising_id}`
+- Header:
+  - Accept:application/json
+
+Response:
+
+- Status code: **200**
+
+```json
+{
+    "massage":"string",
+    "data":{
+            "id":"string, unique",
+            "title":"string",
+            "description":"string",
+            "image":"string",
+            "categories":"string, unique",
+            "status":"boolean"
+        }
+}
+```
+
+- Status code: **400**
+
+```json
+{
+  "message": "string"
+}
+```
+
+#### Create Advertising
+
+Request :
+
+- Method: **POST**
+- Endpoint: `/advertising`
+- Header:
+  - Content-Type:application/json
+  - Accept:application/json
+  - x-access-token = "token"
+- Body:
+
+```json
+{
+  "title":"string",
+  "description":"string",
+  "image":"string",
+  "categories":"string, unique",
+  "status":"boolean"
+}
+```
+
+Response:
+
+- Status code: **201**
+
+```json
+{
+  "message": "string"
+}
+```
+
+- Status code: **500**
+
+```json
+{
+  "message": "string",
+  "error": "string"
+}
+```
+
+#### Update Advertising
+
+Request :
+
+- Method: **PATCH**
+- Endpoint: `/advertising/{advertising_id}`
+- Header:
+  - Content-Type:application/json
+  - Accept:application/json
+- Body:
+
+```json
+{
+    "title":"string",
+    "description":"string",
+    "image":"string",
+    "categories":"string, unique",
+    "status":"boolean"
+}
+```
+
+Responses:
+
+- Status code: **201**
+
+```json
+{
+  "message": "string"
+}
+```
+
+- Status code: **500**
+
+```json
+{
+  "message": "string",
+  "error": "string"
+}
+```
+
+#### Delete Advertising
+
+Request :
+
+- Method: **Delete**
+- Endpoint: `/advertising/{advertising_id}`
+- Header:
+  - Accept:application/json
+  - x-access-token = "token"
+
+Response:
+
+- Status code: **200**
+
+```json
+{
+  "message": "string"
+}
+```
+
+- Status code: **404**
+
+```json
+{
+  "message": "string",
+  "error": "string"
+}
+```
