@@ -23,7 +23,7 @@ module.exports = {
         const user = new User(data);
         await user.save();
       } catch (error) {
-        res.status(406).json({
+        return res.status(406).json({
           error: error.message
         })
       }

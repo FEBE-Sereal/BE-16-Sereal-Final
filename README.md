@@ -14,17 +14,17 @@
 
 ## Deploy Site
 
-- [[https://sereal-be-testing.up.railway.app]]
+- [https://sereal-be-testing.up.railway.app](https://sereal-be-testing.up.railway.app)
 
 ## API Documentation
 
 - [Open API spesification file](/api/sereal.json)
   atau lewat swagger hub
-- [Swagger Hub sereal api spesification]()
+- [Swagger Hub sereal api spesification](#)
 
 ## APIs Specification
 
-- **Base URL API** : [[https://sereal-be-testing.up.railway.app/]]
+- **Base URL API** : [https://sereal-be-testing.up.railway.app/](https://sereal-be-testing.up.railway.app/)
 
 ### Authentication
 
@@ -85,7 +85,7 @@ Response:
 
 ```json
 {
-  "message": "string"
+  "error": "string"
 }
 ```
 
